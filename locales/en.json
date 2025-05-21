@@ -1,0 +1,119 @@
+{
+  "HomePage": {
+    "title": "Apicorn",
+    "description": "Modern API testing tool for developers",
+    "projectGoal": "Project goal: Create <highlight>Postman-like REST client</highlight> with auth, history and variables support",
+    "courseInfo": "Developed as part of the <courseLink>RS School React Course</courseLink> - free education program",
+    "featuresTitle": "Features",
+    "features": {
+      "restClient": "Full-featured REST client with all HTTP methods support",
+      "history": "Track your request history and quickly access previous calls",
+      "variables": "Manage environment variables for different API endpoints"
+    },
+    "technologies": "Technologies",
+    "technologiesList": {
+      "nextjs": "Full-stack framework with React and Server Components",
+      "supabase": "Open source Firebase alternative with realtime DB",
+      "tailwind": "Utility-first CSS framework for rapid UI development",
+      "postman": "Code generation for 8+ languages with Postman engine",
+      "i18n": "Internationalization with next-intl library",
+      "react": "Latest React features with Server Components"
+    },
+    "team": "Our Team",
+    "welcomeBack": "Welcome back, {name}!",
+    "restClient": "REST Client",
+    "history": "History",
+    "variables": "Variables",
+    "getStarted": "Get Started",
+    "authPrompt": "Sign up now to start testing your APIs",
+    "taskRequirements": "Task Requirements",
+    "teamMembers": {
+      "jjjulietta": "Yuliya Ivachshanka",
+      "xsetiqq": "Tsimafei Liauchuk",
+      "spoonya": "Siarhei Punia"
+    }
+  },
+  "Navigation": {
+    "home": "Home",
+    "Sign In": "Sign In",
+    "Sign Up": "Sign Up",
+    "Sign Out": "Sign Out",
+    "pathnames": "Pathnames"
+  },
+  "Menu": {
+    "Rest Client": "Rest Client",
+    "History": "History",
+    "Variables": "Variables"
+  },
+  "Auth": {
+    "Sign In": "Log in",
+    "Sign Up": "Sign up",
+    "Sign In Auth": "Sign in",
+    "Sign Up Auth": "Sign up",
+    "isAuth": "Do you have an account?",
+    "isNotAuth": "You don't have an account?"
+  },
+  "AuthSchema": {
+    "name": "Name must be at least 2 characters",
+    "onlyLetters": "Only letters are allowed",
+    "email": "Invalid email address",
+    "password": "Password must be at least 8 characters",
+    "password1": "Must contain at least one letter",
+    "password2": "Must contain at least one digit",
+    "password3": "Must contain at least one special character",
+    "confirmPassword": "Passwords do not match",
+    "wrongPassowrdOrEmail": "Wrong password or email"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ru {ru Rus} en {🇺🇸 Eng} other {Unknown}}"
+  },
+  "404": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist",
+    "button": "Back home"
+  },
+  "Sidebar": {
+    "history": "History",
+    "variables": "Variables",
+    "restClient": "Rest Client"
+  },
+  "Mobile": {
+    "mobileVersion": "Mobile version is not supported",
+    "Pls": "Please use the app on a computer. :( "
+  },
+  "Variables": {
+    "variables": "Variables",
+    "key": "Key",
+    "value": "Value",
+    "delete": "Delete",
+    "add": "Add",
+    "message": "already exists",
+    "copyVariable": "Copy variable"
+  },
+  "History": {
+    "history": "Request history",
+    "noHistory": "No request history",
+    "message": "Try sending a request through our REST client.",
+    "goToClient": "Go to the client",
+    "delete": "Clear history"
+  },
+  "RestClient": {
+    "copySnippet": "Copy snippet",
+    "genCode": "Generated code",
+    "submit": "Submit",
+    "headers": "Headers",
+    "addHeader": "Add header",
+    "headersEmpty": "Headers are empty",
+    "body": "Body",
+    "key": "Key",
+    "value": "Value",
+    "request": "Request",
+    "response": "Response",
+    "status": "Status",
+    "noStatus": "No status available",
+    "prettify": "Prettify",
+    "Clear": "Clear"
+  },
+  "PageLayout": {}
+}

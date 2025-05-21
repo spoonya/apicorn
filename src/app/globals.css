@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  --header-height: 64px;
+  --footer-height: 58px;
+}
+
+body {
+  height: 100lvh;
+  width: 100%;
+  font-family: var(--font-jetbrains-mono);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.list-reset {
+  list-style-type: none;
+
+  padding: 0;
+  margin: 0;
+}
+
+.title {
+  text-shadow: 2px 5px 3px rgba(73, 64, 145, 0.5);
+}
+
+.name {
+  text-shadow: 2px 5px 3px rgba(6, 21, 233, 0.5);
+}
