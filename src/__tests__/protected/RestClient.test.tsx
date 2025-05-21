@@ -1,5 +1,7 @@
-import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import RestClient from '@/app/[locale]/(protected)/rest-client/page';
+import { render, screen } from '@testing-library/react';
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -14,6 +16,17 @@ vi.mock('@/components', () => ({
   RequestPanel: () => <div>RequestPanel</div>,
   CodeGenPreview: () => <div>CodeGenPreview</div>,
   ResponseViewer: () => <div>ResponseViewer</div>,
+}));
+
+vi.mock('next-intl', () => ({
+  useLocale: () => 'en',
+}));
+
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({
+    replace: vi.fn(),
+  }),
+  useSearchParams: () => new URLSearchParams(),
 }));
 
 vi.mock('@/hooks', () => ({
@@ -54,8 +67,6 @@ vi.mock('@/utils/storage', () => ({
 vi.mock('@/hooks/useDebouncedEffect', () => ({
   useDebouncedEffect: (fn: () => void) => fn(),
 }));
-
-import RestClient from '@/app/[locale]/(protected)/rest-client/page';
 
 describe('RestClient', () => {
   it('renders all main blocks', () => {
