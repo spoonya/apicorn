@@ -1,21 +1,16 @@
 'use client';
 
+import { useLocale } from 'next-intl';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { getStoredVariables } from '@/lib/getStoredVariables';
-import { applyVariables } from '@/lib/applyVariables';
-import { encodeRequestToUrl, decodeRequestFromUrl } from '@/utils/urlParams';
-import { saveRequestToHistory } from '@/utils/storage';
-import { useDebouncedEffect } from '@/hooks/useDebouncedEffect';
 
-import {
-  CodeGenPreview,
-  RequestPanel,
-  RequestSearch,
-  ResponseViewer,
-  Sidebar,
-} from '@/components';
+import { CodeGenPreview, RequestPanel, RequestSearch, ResponseViewer, Sidebar } from '@/components';
 import { useRequestConfig, useRequestExecutor } from '@/hooks';
+import { useDebouncedEffect } from '@/hooks/useDebouncedEffect';
+import { applyVariables } from '@/lib/applyVariables';
+import { getStoredVariables } from '@/lib/getStoredVariables';
+import { saveRequestToHistory } from '@/utils/storage';
+import { decodeRequestFromUrl, encodeRequestToUrl } from '@/utils/urlParams';
 
 type HttpMethod =
   | 'GET'
@@ -27,6 +22,7 @@ type HttpMethod =
   | 'OPTIONS';
 
 export default function RestClient() {
+  const locale = useLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
   const encodedReq = searchParams.get('req');
@@ -39,6 +35,11 @@ export default function RestClient() {
   });
 
   const { execute, response, error } = useRequestExecutor();
+
+  const updateUrl = (newParams: string) => {
+    const newPath = `/${locale}/rest-client${newParams}`;
+    router.replace(newPath, { scroll: false });
+  };
 
   useEffect(() => {
     if (!encodedReq) return;
@@ -56,7 +57,7 @@ export default function RestClient() {
         }))
       );
     }
-  }, [encodedReq]);
+  }, [encodedReq, locale]);
 
   useDebouncedEffect(
     () => {
@@ -68,9 +69,9 @@ export default function RestClient() {
       };
 
       const encoded = encodeRequestToUrl(requestToSave);
-      router.replace(`/rest-client?req=${encoded}`, { scroll: false });
+      updateUrl(`?req=${encoded}`);
     },
-    [requestConfig.headers],
+    [requestConfig.headers, locale],
     100
   );
 
@@ -107,7 +108,7 @@ export default function RestClient() {
 
     saveRequestToHistory(requestToSave);
     const encoded = encodeRequestToUrl(requestToSave);
-    router.replace(`/rest-client?req=${encoded}`, { scroll: false });
+    updateUrl(`?req=${encoded}`);
 
     execute(requestConfig.method, finalUrl, finalHeaders, finalBody);
   };
@@ -116,7 +117,7 @@ export default function RestClient() {
     requestConfig.setMethod('GET');
     requestConfig.setUrl('');
     requestConfig.setBody('');
-    router.replace('/rest-client', { scroll: false });
+    updateUrl('');
   };
 
   return (

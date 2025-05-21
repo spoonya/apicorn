@@ -29,6 +29,5 @@ describe('<AuthButtons />', () => {
     expect(links).toHaveLength(2);
     expect(screen.getByText('Navigation.Sign In')).toBeInTheDocument();
     expect(screen.getByText('Navigation.Sign Up')).toBeInTheDocument();
-
   });
 });
