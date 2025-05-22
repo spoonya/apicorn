@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   CodeGenPreview,
@@ -34,6 +34,8 @@ export default function RestClient() {
   });
 
   const { execute, response, error } = useRequestExecutor();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const updateUrl = (newParams: string) => {
     const newPath = `/${locale}/rest-client${newParams}`;
@@ -89,13 +91,18 @@ export default function RestClient() {
         headers: requestConfig.headers,
         body: requestConfig.body,
       };
-
       const encoded = encodeRequestToUrl(requestToSave);
       updateUrl(`?req=${encoded}`);
     },
     [requestConfig.headers, locale],
     100
   );
+
+  useEffect(() => {
+    if (response || error) {
+      setIsSubmitting(false);
+    }
+  }, [response, error]);
 
   const handleSubmit = () => {
     const trimmedUrl = requestConfig.url.trim();
@@ -107,7 +114,10 @@ export default function RestClient() {
     try {
       new URL(finalUrl);
     } catch {
-      execute('GET', 'https://httpstat.us/404', [], '');
+      setIsSubmitting(true);
+      execute('GET', 'https://httpstat.us/404', [], '').finally(() => {
+        setIsSubmitting(false);
+      });
       return;
     }
 
@@ -132,7 +142,12 @@ export default function RestClient() {
     const encoded = encodeRequestToUrl(requestToSave);
     updateUrl(`?req=${encoded}`);
 
-    execute(requestConfig.method, finalUrl, finalHeaders, finalBody);
+    setIsSubmitting(true);
+    execute(requestConfig.method, finalUrl, finalHeaders, finalBody).finally(
+      () => {
+        setIsSubmitting(false);
+      }
+    );
   };
 
   const handleReset = () => {
@@ -153,6 +168,7 @@ export default function RestClient() {
           setUrl={requestConfig.setUrl}
           onSubmit={handleSubmit}
           onClickReset={handleReset}
+          loading={isSubmitting}
         />
         <div className="flex h-full gap-2">
           <RequestPanel
