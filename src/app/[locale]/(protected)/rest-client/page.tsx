@@ -4,22 +4,21 @@ import { useLocale } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { CodeGenPreview, RequestPanel, RequestSearch, ResponseViewer, Sidebar } from '@/components';
+import {
+  CodeGenPreview,
+  RequestPanel,
+  RequestSearch,
+  ResponseViewer,
+  Sidebar,
+} from '@/components';
 import { useRequestConfig, useRequestExecutor } from '@/hooks';
 import { useDebouncedEffect } from '@/hooks/useDebouncedEffect';
 import { applyVariables } from '@/lib/applyVariables';
 import { getStoredVariables } from '@/lib/getStoredVariables';
+import { HttpMethod } from '@/types';
+import { RequestData } from '@/types/requestData';
 import { saveRequestToHistory } from '@/utils/storage';
 import { decodeRequestFromUrl, encodeRequestToUrl } from '@/utils/urlParams';
-
-type HttpMethod =
-  | 'GET'
-  | 'POST'
-  | 'PUT'
-  | 'DELETE'
-  | 'PATCH'
-  | 'HEAD'
-  | 'OPTIONS';
 
 export default function RestClient() {
   const locale = useLocale();
@@ -42,26 +41,49 @@ export default function RestClient() {
   };
 
   useEffect(() => {
-    if (!encodedReq) return;
+    if (encodedReq) {
+      const decoded = decodeRequestFromUrl(encodedReq);
+      if (decoded) {
+        requestConfig.setMethod(decoded.method as HttpMethod);
+        requestConfig.setUrl(decoded.url);
+        requestConfig.setBody(decoded.body || '');
+        requestConfig.setHeaders(
+          (decoded.headers || []).map((header, index) => ({
+            id: `header-${index}`,
+            key: header.key,
+            value: header.value,
+          }))
+        );
+      }
+      return;
+    }
 
-    const decoded = decodeRequestFromUrl(encodedReq);
-    if (decoded) {
-      requestConfig.setMethod(decoded.method as HttpMethod);
-      requestConfig.setUrl(decoded.url);
-      requestConfig.setBody(decoded.body || '');
-      requestConfig.setHeaders(
-        (decoded.headers || []).map((header, index) => ({
-          id: `header-${index}`,
-          key: header.key,
-          value: header.value,
-        }))
-      );
+    const existing = localStorage.getItem('requests');
+    if (existing) {
+      try {
+        const history: RequestData[] = JSON.parse(existing);
+        if (Array.isArray(history) && history.length > 0) {
+          const last = history[0];
+          requestConfig.setMethod(last.method as HttpMethod);
+          requestConfig.setUrl(last.url);
+          requestConfig.setBody(last.body || '');
+          requestConfig.setHeaders(
+            (last.headers || []).map((header, index) => ({
+              id: `header-${index}`,
+              key: header.key,
+              value: header.value,
+            }))
+          );
+          const newEncoded = encodeRequestToUrl(last);
+          updateUrl(`?req=${newEncoded}`);
+        }
+      } catch {}
     }
   }, [encodedReq, locale]);
 
   useDebouncedEffect(
     () => {
-      const requestToSave = {
+      const requestToSave: RequestData = {
         method: requestConfig.method,
         url: requestConfig.url,
         headers: requestConfig.headers,
@@ -99,7 +121,7 @@ export default function RestClient() {
 
     const finalBody = applyVariables(requestConfig.body, variables);
 
-    const requestToSave = {
+    const requestToSave: RequestData = {
       method: requestConfig.method,
       url: requestConfig.url,
       headers: requestConfig.headers,

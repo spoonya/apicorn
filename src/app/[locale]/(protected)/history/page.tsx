@@ -1,12 +1,13 @@
 'use client';
 
-import { Sidebar } from '@/components';
-import { AppRoutes } from '@/services';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { encodeRequestToUrl } from '@/utils/urlParams';
+
+import { Sidebar } from '@/components';
+import { AppRoutes } from '@/services';
 import { RequestData } from '@/types/requestData';
-import { useTranslations } from 'next-intl';
+import { encodeRequestToUrl } from '@/utils/urlParams';
 
 export default function HistoryPage() {
   const t = useTranslations('History');

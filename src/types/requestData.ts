@@ -1,11 +1,13 @@
+import { HttpMethod } from './http-method';
+
 export type Header = {
   key: string;
   value: string;
 };
 
-export type RequestData = {
-  method: string;
+export interface RequestData {
+  method: HttpMethod | string;
   url: string;
-  headers: Header[];
+  headers?: Array<{ key: string; value: string }>;
   body?: string;
-};
+}
