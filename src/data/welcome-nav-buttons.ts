@@ -4,7 +4,7 @@ import { AppRoutes } from '@/services';
 
 export const welcomeNavButtons = [
   {
-    route: AppRoutes.REST,
+    route: AppRoutes.HOME,
     color: 'bg-blue-600',
     icon: Rocket,
     key: 'restClient',

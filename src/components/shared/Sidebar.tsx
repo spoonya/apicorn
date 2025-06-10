@@ -24,7 +24,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
     >
       <ul className="nav flex flex-col gap-8">
         <li>
-          <Link href={AppRoutes.REST}>
+          <Link href={AppRoutes.HOME}>
             <Tooltip content={t('restClient')}>
               <ArchiveRestore className="stroke-gray-600 hover:stroke-primary transition-colors outline-none" />
             </Tooltip>

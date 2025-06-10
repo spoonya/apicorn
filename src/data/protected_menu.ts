@@ -3,7 +3,7 @@ import { AppRoutes } from '@/services';
 export const protected_menu = [
   {
     name: 'Rest Client',
-    link: AppRoutes.REST,
+    link: AppRoutes.HOME,
   },
   {
     name: 'History',

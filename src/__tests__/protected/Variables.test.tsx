@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import Variables from '@/app/[locale]/(root)/variables/page';
+import { render, screen } from '@testing-library/react';
 
 vi.mock('@/components/shared/variables/VariableManager', () => ({
   default: () => <div>Variable Manager</div>,
 }));
-
-import Variables from '@/app/[locale]/(protected)/variables/page';
 
 describe('Variables', () => {
   it('renders VariableManager', () => {

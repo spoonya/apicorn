@@ -38,7 +38,8 @@
     "Sign In": "Sign In",
     "Sign Up": "Sign Up",
     "Sign Out": "Sign Out",
-    "pathnames": "Pathnames"
+    "pathnames": "Pathnames",
+    "about": "About"
   },
   "Menu": {
     "Rest Client": "Rest Client",

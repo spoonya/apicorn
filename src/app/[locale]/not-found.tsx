@@ -9,12 +9,25 @@ export default function NotFound() {
   const t = useTranslations('404');
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen p-4 text-center">
-      <h2>404</h2>
-      <p>{t('description')}</p>
-      <Button as={Link} href={AppRoutes.HOME} color="primary">
+    <div className="h-full flex flex-col items-center justify-center p-6">
+      <p className="text-8xl font-bold text-gray-800">404</p>
+      <div className="space-y-3">
+        <h1 className="text-2xl font-semibold text-gray-800 text-center">
+          {t('title') || 'Page Not Found'}
+        </h1>
+        <p className="text-gray-600">
+          {t('description') ||
+            "The page you're looking for doesn't exist or has been moved."}
+        </p>
+      </div>
+      <Button
+        as={Link}
+        href={AppRoutes.HOME}
+        color="primary"
+        className="mt-4 w-48 mx-auto py-3 font-medium rounded-lg transition hover:opacity-90"
+      >
         {t('button')}
       </Button>
-    </main>
+    </div>
   );
 }

@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { Container, Logo } from '@/components';
+import { AppRoutes } from '@/services';
+import { Button } from '@heroui/react';
 import { User } from '@supabase/supabase-js';
 
 import { ProjectInfoCard, UserWelcomeSection } from './';
@@ -34,9 +37,20 @@ export const HeroSection = ({ user }: Readonly<HeroSectionProps>) => {
             <p className="text-2xl text-slate-600 mb-8 max-w-3xl">
               {t('description')}
             </p>
+
+            {!user && (
+              <Button
+                as={Link}
+                href={AppRoutes.HOME}
+                size="lg"
+                className="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+              >
+                {t('getStarted')}
+              </Button>
+            )}
           </div>
           <ProjectInfoCard />
-          {user ? <UserWelcomeSection name={name} /> : ''}
+          {user && <UserWelcomeSection name={name} />}
         </motion.div>
       </Container>
     </section>

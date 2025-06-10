@@ -16,6 +16,7 @@ interface RequestSearchProps {
   setUrl: (value: string) => void;
   onSubmit: () => void;
   onClickReset: () => void;
+  loading: boolean;
 }
 
 export const RequestSearch = ({
@@ -26,6 +27,7 @@ export const RequestSearch = ({
   setUrl,
   onSubmit,
   onClickReset,
+  loading,
 }: Readonly<RequestSearchProps>) => {
   const t = useTranslations('RestClient');
 
@@ -40,16 +42,19 @@ export const RequestSearch = ({
           selectedKeys={[method]}
           onChange={(e) => setMethod(e.target.value as HttpMethod)}
           disallowEmptySelection
+          disabled={loading}
         >
-          {requestMethods.map((method) => (
-            <SelectItem key={method.value} textValue={method.label}>
-              {method.label}
+          {requestMethods.map((methodItem) => (
+            <SelectItem key={methodItem.value} textValue={methodItem.label}>
+              {methodItem.label}
             </SelectItem>
           ))}
         </Select>
-        <Button color="danger" onPress={onClickReset}>
+
+        <Button color="danger" onPress={onClickReset} disabled={loading}>
           {t('Clear')}
         </Button>
+
         <Input
           classNames={{
             inputWrapper: 'bg-default-50 border-1 border-gray-200',
@@ -59,9 +64,15 @@ export const RequestSearch = ({
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           fullWidth
+          disabled={loading}
         />
 
-        <Button color="primary" onPress={onSubmit}>
+        <Button
+          color="primary"
+          onPress={onSubmit}
+          isLoading={loading}
+          disabled={loading}
+        >
           {t('submit')}
         </Button>
       </div>

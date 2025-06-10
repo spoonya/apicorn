@@ -1,5 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import Home from '@/app/[locale]/(utility)/about/page';
+import { render, screen, waitFor } from '@testing-library/react';
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -30,8 +32,6 @@ vi.mock('@/components', () => ({
   GetStartedSection: () => <div>Start</div>,
 }));
 
-import Home from '@/app/[locale]/(root)/page';
-
 describe('Home page', () => {
   it('renders all sections', async () => {
     render(<Home />);
@@ -41,7 +41,6 @@ describe('Home page', () => {
       expect(screen.getByText('Features')).toBeInTheDocument();
       expect(screen.getByText('Tech')).toBeInTheDocument();
       expect(screen.getByText('Team')).toBeInTheDocument();
-      expect(screen.getByText('Start')).toBeInTheDocument();
     });
   });
 });

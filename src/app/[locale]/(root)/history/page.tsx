@@ -1,12 +1,13 @@
 'use client';
 
-import { Sidebar } from '@/components';
-import { AppRoutes } from '@/services';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { encodeRequestToUrl } from '@/utils/urlParams';
+
+import { Sidebar } from '@/components';
+import { AppRoutes } from '@/services';
 import { RequestData } from '@/types/requestData';
-import { useTranslations } from 'next-intl';
+import { encodeRequestToUrl } from '@/utils/urlParams';
 
 export default function HistoryPage() {
   const t = useTranslations('History');
@@ -43,7 +44,7 @@ export default function HistoryPage() {
             <h1 className="text-2xl font-semibold">{t('noHistory')}</h1>
             <p className="text-gray-500">{t('message')}</p>
             <p>
-              <Link href={AppRoutes.REST}>
+              <Link href={AppRoutes.HOME}>
                 <span className="inline-block px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
                   {t('goToClient')}
                 </span>
@@ -67,7 +68,7 @@ export default function HistoryPage() {
               return (
                 <Link
                   key={index}
-                  href={`${AppRoutes.REST}?req=${encoded}`}
+                  href={`${AppRoutes.HOME}?req=${encoded}`}
                   className="block border border-gray-300 rounded-lg p-4 hover:shadow-md transition bg-white"
                 >
                   <div className="font-medium text-blue-600">

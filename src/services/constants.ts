@@ -7,6 +7,7 @@ export enum AppRoutes {
   VARS = '/variables',
   SIGN_IN = '/sign-in',
   SIGN_UP = '/sign-up',
+  ABOUT = '/about',
 }
 
 export const locales = ['en', 'ru'] as const;
