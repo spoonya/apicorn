@@ -1,8 +1,9 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
 import { NextIntlClientProvider } from 'next-intl';
-import { DefaultLayout } from '@/layouts';
+import { describe, expect, it, vi } from 'vitest';
+
 import { Footer } from '@/components';
+import { DefaultLayout } from '@/layouts';
+import { render, screen } from '@testing-library/react';
 
 vi.mock('@supabase/supabase-js');
 vi.mock('next/navigation', () => ({
@@ -25,7 +26,7 @@ describe('<Footer />', () => {
     );
 
     const links = screen.getAllByRole('link');
-    expect(links).toHaveLength(5);
+    expect(links).toHaveLength(6);
     expect(screen.getByText('GitHub')).toBeInTheDocument();
     expect(screen.getByText('spoonya')).toBeInTheDocument();
     expect(screen.getByRole('img')).toBeInTheDocument();

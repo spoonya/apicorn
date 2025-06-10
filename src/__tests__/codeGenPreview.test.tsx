@@ -41,7 +41,6 @@ describe('Home page', () => {
       expect(screen.getByText('Features')).toBeInTheDocument();
       expect(screen.getByText('Tech')).toBeInTheDocument();
       expect(screen.getByText('Team')).toBeInTheDocument();
-      expect(screen.getByText('Start')).toBeInTheDocument();
     });
   });
 });

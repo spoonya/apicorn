@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import ProtectedLayout from '@/app/[locale]/(protected)/layout';
+import ProtectedLayout from '@/app/[locale]/(root)/layout';
 import { render, screen, waitFor } from '@testing-library/react';
 
 vi.mock('next/navigation', () => ({
