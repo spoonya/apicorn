@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import RestClient from '@/app/[locale]/(protected)/rest-client/page';
+import RestClient from '@/app/[locale]/(root)/page';
 import { render, screen } from '@testing-library/react';
 
 vi.mock('next/navigation', () => ({

@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import Loading from '@/app/[locale]/(root)/variables/loading';
+import { render, screen } from '@testing-library/react';
 
 vi.mock('@/components', () => ({
   Preloader: () => <div data-testid="preloader">Loading...</div>,
 }));
-
-import Loading from '@/app/[locale]/(protected)/variables/loading';
 
 describe('Loading', () => {
   it('renders Preloader', () => {

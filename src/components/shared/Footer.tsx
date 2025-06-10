@@ -1,8 +1,10 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import { developers } from '@/data';
+import { AppRoutes } from '@/services';
 import { cn } from '@/utils';
 import { Link } from '@heroui/react';
 
@@ -10,6 +12,8 @@ import { Container } from '../ui';
 import { DeveloperItem } from './DeveloperItem';
 
 export const Footer = ({ className }: { className?: string }) => {
+  const t = useTranslations('Navigation');
+
   return (
     <footer
       className={cn(
@@ -25,6 +29,12 @@ export const Footer = ({ className }: { className?: string }) => {
             ))}
           </div>
           <div className="flex items-center gap-6">
+            <Link
+              href={AppRoutes.ABOUT}
+              className="text-sm text-slate-600 hover:text-blue-600 transition-colors"
+            >
+              {t('about')}
+            </Link>
             <Link
               href="https://github.com/spoonya/rest-client-app"
               className="text-sm text-slate-600 hover:text-blue-600 transition-colors"

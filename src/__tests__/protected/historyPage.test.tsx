@@ -1,5 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import HistoryPage from '@/app/[locale]/(root)/history/page';
+import { fireEvent, render, screen } from '@testing-library/react';
 
 vi.mock('@/components', () => ({
   Sidebar: () => <div data-testid="sidebar">Sidebar</div>,
@@ -28,8 +30,6 @@ vi.mock('next/link', () => ({
     children: React.ReactNode;
   }) => <a href={href}>{children}</a>,
 }));
-
-import HistoryPage from '@/app/[locale]/(protected)/history/page';
 
 describe('HistoryPage', () => {
   beforeEach(() => {

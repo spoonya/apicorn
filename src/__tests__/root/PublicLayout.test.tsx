@@ -1,5 +1,5 @@
+import PublicLayout from '@/app/[locale]/(utility)/layout';
 import { render, screen } from '@testing-library/react';
-import PublicLayout from '@/app/[locale]/(root)/layout';
 
 describe('PublicLayout', () => {
   it('renders children', () => {

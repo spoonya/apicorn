@@ -1,5 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import Home from '@/app/[locale]/(utility)/about/page';
+import { render, screen, waitFor } from '@testing-library/react';
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -27,8 +29,6 @@ vi.mock('@/components', () => ({
   TeamSection: () => <div>Team</div>,
   GetStartedSection: () => <div>Get Started</div>,
 }));
-
-import Home from '@/app/[locale]/(root)/page';
 
 describe('Home', () => {
   it('renders Preloader while loading, then shows content', async () => {

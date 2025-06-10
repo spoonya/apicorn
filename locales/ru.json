@@ -38,7 +38,8 @@
     "Sign In": "Вход",
     "Sign Up": "Регистрация",
     "Sign Out": "Выйти",
-    "pathnames": "Пути"
+    "pathnames": "Пути",
+    "about": "О проекте"
   },
   "Menu": {
     "Rest Client": "REST Клиент",

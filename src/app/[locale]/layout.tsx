@@ -8,10 +8,10 @@ import { notFound } from 'next/navigation';
 import { ReactNode } from 'react';
 
 import { Footer, Header } from '@/components';
+import MobileWarning from '@/components/shared/MobileWarning';
 import { routing } from '@/i18n/routing';
 
 import { Providers } from '../providers';
-import MobileWarning from '@/components/shared/MobileWarning';
 
 export const metadata: Metadata = {
   title: 'Rest Client App',
@@ -47,7 +47,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className={jetBrainsMono.className}>
         <Providers>
           <NextIntlClientProvider>
-            <div className="w-full flex flex-col justify-between">
+            <div className="w-full flex flex-col justify-between min-h-screen">
               <Header />
               <main className="h-full relative">
                 <MobileWarning />

@@ -1,5 +1,7 @@
-import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
+
+import Home from '@/app/[locale]/(utility)/about/page';
+import { render, screen, waitFor } from '@testing-library/react';
 
 vi.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -29,8 +31,6 @@ vi.mock('@/components', () => ({
   TeamSection: () => <div>Team</div>,
   GetStartedSection: () => <div>Start</div>,
 }));
-
-import Home from '@/app/[locale]/(root)/page';
 
 describe('Home page', () => {
   it('renders all sections', async () => {
